@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="angForm" novalidate>
+
+            Name : <input type="text" formControlName="name" #name [(ngModel)]="product.name" class="form-control">
+            <div *ngIf="angForm.controls['name'].errors && angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)">
+            <div *ngIf="angForm.controls['name'].errors['required']" class="alert alert-danger">
+                Name is empty!!
+            </div>
+            </div>
+
+            Price : <input type="text" formControlName="price" #price [(ngModel)]="product.price" class="form-control">
+            <div *ngIf="angForm.controls['price'].errors && angForm.controls['price'].invalid && (angForm.controls['price'].dirty || angForm.controls['price'].touched)">
+                <div *ngIf="angForm.controls['price'].errors['required']" class="alert alert-danger">
+                Price is empty!!
+                </div>
+            </div>
+            
+          
+
+            <div class="form-control">
+                Returnable : <input formControlName="returnable" #returnable [(ngModel)]="product.returnable" [checked]="product.returnable" value="true" type="radio"> Yes
+                             <input formControlName="returnable" #returnable [(ngModel)]="product.returnable" [checked]="product.returnable==false?true:false" value="false" type="radio"> No
+            </div>
+
+            <br>
+
+            <button type="submit" class="btn btn-primary" (click)="updateProduct(product._id,angForm.controls['name'].value,angForm.controls['price'].value,angForm.controls['returnable'].value)"
+            [disabled]="angForm.invalid">
+                Update Product
+            </button>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="angForm" novalidate>
+
+            Name : <input type="text" formControlName="name" class="form-control">
+            <div *ngIf="angForm.controls['name'].errors && angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)">
+            <div *ngIf="angForm.controls['name'].errors['required']" class="alert alert-danger">
+                Name is empty!!
+            </div>
+            </div>
+
+            Price : <input type="text" formControlName="price" class="form-control">
+            <div *ngIf="angForm.controls['price'].errors && angForm.controls['price'].invalid && (angForm.controls['price'].dirty || angForm.controls['price'].touched)">
+                <div *ngIf="angForm.controls['price'].errors['required']" class="alert alert-danger">
+                Price is empty!!
+                </div>
+            </div>
+            
+           
+
+            <div class="from-control">
+            Returnable : <input formControlName="returnable" value="true" type="radio"> True
+                         <input formControlName="returnable" value="false" type="radio"> False
+            </div>
+           
+
+            <br>
+            
+            <button type="submit" class="btn btn-primary" (click)="addProduct(angForm.controls['name'].value,angForm.controls['price'].value,angForm.controls['returnable'].value)"
+            [disabled]="angForm.pristine || angForm.invalid">
+                Add Product
+            </button>
+
+        </form>
+
+    </div>
+</div>
